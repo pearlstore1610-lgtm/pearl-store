@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="mainHtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pearl | Official Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Segoe+UI:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root { --nibeti: #630d0d; --soft-bg: rgba(255, 248, 240, 0.6); }
+
+        html { scroll-behavior: smooth; }
+
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            margin: 0; 
+            background-color: #fff;
+            background-image: url('Logo-img.jpeg');
+            background-repeat: no-repeat;
+            background-position: center 200px;
+            background-size: 80%;
+            background-attachment: fixed;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.75); 
+            z-index: -1;
+        }
+
+        header { 
+            background-color: var(--nibeti); color: white; padding: 12px 5%; 
+            display: grid; grid-template-columns: auto 1fr auto; align-items: center; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3); position: sticky; top: 0; z-index: 1000; 
+        }
+        .header-logo { height: 45px; mix-blend-mode: screen; }
+        
+        .main-nav { display: flex; justify-content: center; gap: 20px; }
+        .main-nav a { color: white; text-decoration: none; font-weight: 600; font-size: 14px; transition: 0.3s; cursor: pointer; }
+        .main-nav a:hover { color: #d4af37; }
+
+        .lang-btn { 
+            background: transparent; color: white; border: 1px solid rgba(255,255,255,0.4); 
+            padding: 5px 12px; border-radius: 20px; cursor: pointer; font-weight: bold;
+        }
+
+        section { 
+            padding: 60px 5%; margin: 40px auto; max-width: 1100px;
+            background: var(--soft-bg); border-radius: 30px;
+            backdrop-filter: blur(5px); border: 1px solid rgba(99, 13, 13, 0.03);
+        }
+
+        .section-title { text-align: center; font-family: 'Playfair Display', serif; font-size: 32px; color: var(--nibeti); margin-bottom: 30px; }
+
+        /* --- حركة مستمرة للقائمة الجانبية --- */
+        @keyframes sideWave { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(-8px); } }
+
+        .sidebar-nav { position: fixed; top: 150px; z-index: 500; display: flex; flex-direction: column; gap: 12px; }
+        [dir="rtl"] .sidebar-nav { right: 0; } [dir="ltr"] .sidebar-nav { left: 0; }
+
+        .nav-category {
+            background: var(--nibeti); padding: 12px 25px; cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); animation: sideWave 3s infinite ease-in-out;
+            transition: 0.3s;
+        }
+        [dir="rtl"] .nav-category { border-radius: 25px 0 0 25px; border-left: 4px solid #d4af37; }
+        [dir="ltr"] .nav-category { border-radius: 0 25px 25px 0; border-right: 4px solid #d4af37; }
+
+        .nav-category:nth-child(2) { animation-delay: 0.2s; }
+        .nav-category:nth-child(3) { animation-delay: 0.4s; }
+        .nav-category:nth-child(4) { animation-delay: 0.6s; }
+        .nav-category:nth-child(5) { animation-delay: 0.8s; }
+
+        .nav-category:hover { background: #801010; transform: scale(1.1) !important; animation-play-state: paused; }
+        .nav-text { color: white; font-weight: 700; font-size: 14px; white-space: nowrap; }
+
+        /* تواصل معنا - حركة عائمة */
+        @keyframes floatContact { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; margin-top: 30px; justify-items: center; }
+        .contact-card {
+            width: 100%; max-width: 160px; padding: 25px 15px; background: white; border-radius: 20px;
+            text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); animation: floatContact 4s infinite ease-in-out;
+        }
+
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 25px; }
+        .card { background: white; border-radius: 15px; padding: 15px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.4s; }
+        .buy-btn { width: 100%; background: var(--nibeti); color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: 700; margin-top: 15px; }
+
+        .floating-btn { position: fixed; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 1000; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .cart-fixed-btn { bottom: 25px; background: var(--nibeti); color: white; }
+        [dir="rtl"] .cart-fixed-btn { left: 25px; } [dir="ltr"] .cart-fixed-btn { right: 25px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="Logo-img.jpeg" class="header-logo">
+    <nav class="main-nav">
+        <a href="#home" id="linkHome">الرئيسية</a>
+        <a href="#products" id="linkStore">المنتجات</a>
+        <a href="#contact" id="linkContact">تواصل معانا</a>
+    </nav>
+    <button class="lang-btn" onclick="toggleLanguage()" id="langBtn">EN</button>
+</header>
+
+<div class="sidebar-nav" id="sidebar"></div>
+
+<section id="home" style="background:transparent; border:none; text-align: center;">
+    <h1 id="heroTitle" style="font-family: 'Playfair Display', serif; font-size: 50px; color: var(--nibeti);">متجر Pearl</h1>
+    <p id="heroDesc" style="font-size: 18px; color: #555; max-width: 600px; margin: 0 auto;">جمالك يبدأ من هنا.. أرقى مستحضرات العناية بالبشرة والشعر.</p>
+    <button class="buy-btn" style="width: 200px; margin-top: 30px;" onclick="location.href='#products'" id="shopNow">تسوقي الآن</button>
+</section>
+
+<section id="products">
+    <h2 class="section-title" id="titleProducts">منتجاتنا</h2>
+    <div id="productsGrid" class="products-grid"></div>
+</section>
+
+<section id="contact">
+    <h2 class="section-title" id="titleContact">تواصل معنا</h2>
+    <div class="contact-grid">
+        <a href="https://wa.me/201204477877" target="_blank" class="contact-card">
+            <i class="fab fa-whatsapp" style="color:#25D366; font-size:30px;"></i>
+            <span>WhatsApp</span>
+        </a>
+        <a href="https://www.facebook.com/share/17TZ3EJxqZ/" target="_blank" class="contact-card">
+            <i class="fab fa-facebook-f" style="color:#1877F2; font-size:30px;"></i>
+            <span>Facebook</span>
+        </a>
+        <a href="https://www.instagram.com/pearl_store.eg" target="_blank" class="contact-card">
+            <i class="fab fa-instagram" style="color:#E4405F; font-size:30px;"></i>
+            <span>Instagram</span>
+        </a>
+        <a href="https://www.tiktok.com/@pearl_store.eg" target="_blank" class="contact-card">
+            <i class="fab fa-tiktok" style="color:black; font-size:30px;"></i>
+            <span>TikTok</span>
+        </a>
+    </div>
+</section>
+
+<div class="floating-btn cart-fixed-btn">
+    <i class="fas fa-shopping-basket"></i>
+    <span id="cartCount" style="position:absolute; top:-5px; right:-5px; background:red; font-size:12px; padding:3px 7px; border-radius:50%; border:2px solid white;">0</span>
+</div>
+
+<script>
+    let currentLang = 'ar';
+    const translations = {
+        ar: {
+            langBtn: 'EN', linkHome: 'الرئيسية', linkStore: 'المنتجات', linkContact: 'اتصل بنا',
+            heroTitle: 'متجر Pearl', heroDesc: 'جمالك يبدأ من هنا.. أرقى مستحضرات العناية بالبشرة والشعر.', shopNow: 'تسوقي الآن',
+            titleProducts: 'منتجاتنا', titleContact: 'تواصل معنا', addBtn: 'أضف للسلة',
+            categories: { all: 'الكل', skincare: 'سكين كير', hair: 'شعر', skin: 'بشرة', deo: 'مزيلات' }
+        },
+        en: {
+            langBtn: 'AR', linkHome: 'Home', linkStore: 'Store', linkContact: 'Contact',
+            heroTitle: 'Pearl Store', heroDesc: 'Your beauty starts here.. Premium care for you.', shopNow: 'Shop Now',
+            titleProducts: 'Our Products', titleContact: 'Contact Us', addBtn: 'Add to Cart',
+            categories: { all: 'All', skincare: 'Skin Care', hair: 'Hair', skin: 'Body', deo: 'Deodorants' }
+        }
+    };
+
+    const allProducts = [
+        { id: 1, category: 'hair', titleAr: "شامبو ترميم", titleEn: "Repair Shampoo", price: 450, image: "https://via.placeholder.com/200x250?text=Hair" },
+        { id: 2, category: 'skincare', titleAr: "سيروم فيتامين C", titleEn: "Vitamin C Serum", price: 550, image: "https://via.placeholder.com/200x250?text=Skin" }
+    ];
+
+    function toggleLanguage() {
+        currentLang = currentLang === 'ar' ? 'en' : 'ar';
+        document.getElementById('mainHtml').dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+        updateUI();
+    }
+
+    function updateUI() {
+        const t = translations[currentLang];
+        document.getElementById('langBtn').innerText = t.langBtn;
+        document.getElementById('linkHome').innerText = t.linkHome;
+        document.getElementById('linkStore').innerText = t.linkStore;
+        document.getElementById('linkContact').innerText = t.linkContact;
+        document.getElementById('heroTitle').innerText = t.heroTitle;
+        document.getElementById('heroDesc').innerText = t.heroDesc;
+        document.getElementById('shopNow').innerText = t.shopNow;
+        document.getElementById('titleProducts').innerText = t.titleProducts;
+        document.getElementById('titleContact').innerText = t.titleContact;
+
+        const sidebar = document.getElementById('sidebar');
+        sidebar.innerHTML = Object.keys(t.categories).map(key => `
+            <div class="nav-category" onclick="filterProducts('${key}')">
+                <span class="nav-text">${t.categories[key]}</span>
+            </div>
+        `).join('');
+
+        displayProducts(allProducts);
+    }
+
+    function displayProducts(list) {
+        const grid = document.getElementById('productsGrid');
+        grid.innerHTML = list.map(p => `
+            <div class="card">
+                <img src="${p.image}" style="width:100%; border-radius:10px;">
+                <div style="color:var(--nibeti); font-weight:bold; margin:10px 0;">${p.price} EGP</div>
+                <div style="font-weight:600;">${currentLang === 'ar' ? p.titleAr : p.titleEn}</div>
+                <button class="buy-btn">${translations[currentLang].addBtn}</button>
+            </div>
+        `).join('');
+    }
+
+    function filterProducts(cat) {
+        if(cat === 'all') displayProducts(allProducts);
+        else displayProducts(allProducts.filter(p => p.category === cat));
+    }
+
+    updateUI();
+</script>
+</body>
+</html>
